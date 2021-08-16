@@ -1,0 +1,49 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib" InvalidatesImplicitDataTemplateResources="False">
+
+    <!-- Message -->
+    <system:String x:Key="Error">エラー</system:String>
+    <system:String x:Key="Connected">接続済</system:String>
+    <system:String x:Key="StandBy">待機中</system:String>
+    <system:String x:Key="Completed">完了</system:String>
+
+    <!-- Common -->
+    <system:String x:Key="Reference">参照</system:String>
+    <system:String x:Key="Apply">確定</system:String>
+    <system:String x:Key="Confirm">確認</system:String>
+    <system:String x:Key="Cancel">キャンセル</system:String>
+    <system:String x:Key="Send">送信</system:String>
+    <system:String x:Key="Modify">更新</system:String>
+    <system:String x:Key="Connect">接続</system:String>
+
+    <!-- MainWindow -->
+    <system:String x:Key="MainWindowTitle">コントロールパネル</system:String>
+    <system:String x:Key="MainWindowTitleLoading">起動中</system:String>
+    <system:String x:Key="MainWindow_Setting">設定</system:String>
+    <system:String x:Key="MainWindow_Channel">配信</system:String>
+    <system:String x:Key="MainWindow_Helpe">ヘルプ</system:String>
+    <system:String x:Key="MainWindow_Debug">デバッグ</system:String>
+
+    <system:String x:Key="MainWindow_LoadSetting">設定の読込</system:String>
+    <system:String x:Key="MainWindow_SaveSetting">設定の保存</system:String>
+    <system:String x:Key="MainWindow_AdvancedSetting">詳細設定</system:String>
+    <system:String x:Key="MainWindow_Setting_ToolTip">設定</system:String>
+    <system:String x:Key="MainWindow_LoadSetting_ToolTip">全ての設定をファイルから読み込みます</system:String>
+    <system:String x:Key="MainWindow_SaveSetting_ToolTip">全ての設定をファイルへ保存します</system:String>
+    <system:String x:Key="MainWindow_AdvancedSetting_ToolTip">その他の詳細な設定を開きます</system:String>
+
+    <!-- SettingWindow -->
+    <system:String x:Key="SettingWindowTitle">詳細設定</system:String>
+    <system:String x:Key="SettingWindow_APIKey">APIキー</system:String>
+    <system:String x:Key="SettingWindow_OAuth2">OAuth 2.0</system:String>
+    <system:String x:Key="SettingWindow_AuthFileFilter">認証情報</system:String>
+
+    <!-- LiveChatWindow -->
+    <system:String x:Key="LiveChatTitle">配信</system:String>
+    <system:String x:Key="LiveChat_Chat">タイムライン</system:String>
+    <system:String x:Key="LiveChat_SuperChat">スーパーチャット</system:String>
+    <system:String x:Key="LiveChat_History">履歴</system:String>
+    <system:String x:Key="LiveChat_Summary">サマリー</system:String>
+    <system:String x:Key="LiveChat_OpenChatWindow">チャット</system:String>
+</ResourceDictionary>

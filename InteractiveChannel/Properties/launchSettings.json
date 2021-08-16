@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "InteractiveChannel": {
+      "commandName": "Project",
+      "commandLineArgs": "/pipeName SamplePipeName"
+    }
+  }
+}

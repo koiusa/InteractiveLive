@@ -1,0 +1,86 @@
+﻿<Window x:Class="InteractiveChannel.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InteractiveChannel"
+        mc:Ignorable="d"
+        Title="{DynamicResource MainWindowTitle}" Height="300" MinWidth="400" SizeToContent="Width" Loaded="Window_Loaded" Closing="Window_Closing">
+    <Grid>
+        <Button Visibility="Collapsed"/>
+        <DockPanel LastChildFill="True">
+            <StatusBar MouseDoubleClick="StatusBar_MouseDoubleClick" DockPanel.Dock="Bottom" Margin="0,0,0,0" Height="25" Background="#2A2A2A">
+                <StatusBarItem>
+                        <TextBlock Name="UnityLogStatusTextBlock" FontSize="12" Foreground="#EEEEEE">Welcome to Interactive Channel</TextBlock>
+                </StatusBarItem>
+            </StatusBar>
+
+            <TabControl Margin="5,5,5,0">
+                <TabItem Header="{DynamicResource MainWindow_Setting}" ToolTip="{DynamicResource MainWindow_Setting_ToolTip}">
+                    <UniformGrid Rows="2" Columns="3">
+                        <Button Content="{DynamicResource MainWindow_LoadSetting}" Name="LoadSettingsButton" Click="LoadSettingsButton_Click" ToolTip="{DynamicResource MainWindow_LoadSetting_ToolTip}"/>
+                        <Button Content="{DynamicResource MainWindow_SaveSetting}" Name="SaveSettingsButton" Click="SaveSettingsButton_Click" ToolTip="{DynamicResource MainWindow_SaveSetting_ToolTip}"/>
+                        <Button Content="{DynamicResource MainWindow_AdvancedSetting}" Name="SettingButton" Click="SettingButton_Click" ToolTip="{DynamicResource MainWindow_AdvancedSetting_ToolTip}"/>
+                    </UniformGrid>
+                </TabItem>
+                <TabItem Header="{DynamicResource MainWindow_Channel}">
+                    <Grid >
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition MinHeight="60"/>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="VideoID" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
+                        <TextBox Grid.Row="0" Grid.Column="1" Name="VideoIdText" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="16"/>
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="動画情報" HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="16"/>
+                        <TextBlock Grid.Row="1" Grid.Column="1" Text="" Name="LiveStreamInfo" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="16"/>
+                        <Button Grid.Row="2" Grid.Column="0" Grid.RowSpan="3" Content="{DynamicResource Modify}" Name="TitleModifyButton" Click="TitleModifyButton_Click" HorizontalAlignment="Stretch" FontSize="16"/>
+                        <TextBox Grid.Row="2" Grid.Column="1" Text="" Name="LiveTitleText" VerticalAlignment="Stretch" FontSize="16"/>
+                        <TextBox Grid.Row="3" Grid.Column="1" Grid.RowSpan="2" Text="" Name="LiveDescriptionText" VerticalAlignment= "Stretch" FontSize="16"/>
+                        <ToggleButton Grid.Row="5" Grid.Column="0" Content="{DynamicResource Connect}" Name="LiveStreamButton" Click="SendButton_Click" HorizontalAlignment="Stretch" FontSize="16"/>
+                        <TextBlock Grid.Row="5" Grid.Column="1" Text="{DynamicResource StandBy}" Name="LiveStreamStatus" VerticalAlignment= "Center" FontSize="16"/>
+                        <Button Grid.Row="0" Grid.Column="2" Grid.RowSpan="6" Content="{DynamicResource LiveChat_OpenChatWindow}" Name="Button" Click="ChatWindowOpen_Click" FontSize="16"/>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="{DynamicResource MainWindow_Helpe}">
+                    <StackPanel Orientation="Vertical">
+                        <GroupBox Header="使い方などはWebサイトをご覧ください">
+                            <StackPanel Orientation="Vertical" DockPanel.Dock="Top">
+                                <TextBlock><Hyperlink NavigateUri="https://www.google.com/" RequestNavigate="Hyperlink_RequestNavigate">説明書</Hyperlink></TextBlock>
+                                <TextBlock><Hyperlink NavigateUri="https://www.google.com/" RequestNavigate="Hyperlink_RequestNavigate">よくある質問と回答</Hyperlink></TextBlock>
+                            </StackPanel>
+                        </GroupBox>
+                        <GroupBox Header="エラーが出たときは">
+                            <StackPanel Orientation="Vertical" DockPanel.Dock="Top">
+                                <TextBlock Text="↓をダブルクリックでクリップボードにコピーされます。" TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </GroupBox>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="{DynamicResource MainWindow_Debug}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Row="0" Grid.Column="0" Content="AddForce" Name="MoveButton" Click="MoveButton_Click" HorizontalAlignment="Stretch" FontSize="16"/>
+                        <Button Grid.Row="1" Grid.Column="0" Content="GetData" Name="GetCurrentXButton" Click="GetCurrentDataButton_Click" HorizontalAlignment="Stretch" FontSize="16"/>
+                        <TextBlock Grid.Row="1" Grid.Column="1" Text="" Name="ReceiveTextBlock" FontSize="20" VerticalAlignment= "Stretch"/>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </DockPanel>
+    </Grid>
+</Window>

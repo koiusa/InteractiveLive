@@ -1,0 +1,82 @@
+﻿<Window x:Class="InteractiveChannel.LiveChatWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InteractiveChannel"
+        mc:Ignorable="d"
+        Title="LiveChatWindow" Height="300" Width="600" Loaded="Window_Loaded" Closing="Window_Closing" SizeChanged="Window_SizeChanged">
+    <Grid>
+        <StackPanel>
+            <TabControl Margin="5,5,5,0" Name="ChatTypeTab" MinHeight="80" MaxHeight="200">
+                <TabItem Header="{DynamicResource LiveChat_Chat}">
+                    <Grid Name="TimeLineGrid">
+                        <ListView Grid.Row="0" Grid.Column="0" Name="TimeLine" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Stretch" FontSize="16">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="{x:Type ListViewItem}">
+                                    <Setter Property="Background" Value="{Binding color}"/>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="ユーザー" DisplayMemberBinding="{Binding AuthorDetails.DisplayName}" Width="100"/>
+                                    <GridViewColumn Header="コメント" DisplayMemberBinding="{Binding Snippet.DisplayMessage}" Width="Auto"/>
+                                    <GridViewColumn Header="送信日時" DisplayMemberBinding="{Binding Snippet.PublishedAt}" Width="Auto"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="{DynamicResource LiveChat_SuperChat}">
+                    <Grid x:Name="SuperChatGrid">
+                        <ListView Grid.Row="0" Grid.Column="0" GridViewColumnHeader.Click="listHeader_Click" Name="SuperChat" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="16">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="{x:Type ListViewItem}">
+                                    <Setter Property="Background" Value="{Binding color}"/>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="ユーザー" DisplayMemberBinding="{Binding AuthorDetails.DisplayName}" Width="100"/>
+                                    <GridViewColumn Header="コメント" DisplayMemberBinding="{Binding Snippet.DisplayMessage}" Width="Auto"/>
+                                    <GridViewColumn Header="金額" DisplayMemberBinding="{Binding Snippet.SuperChatDetails.AmountMicros}" Width="100"/>
+                                    <GridViewColumn Header="通貨" DisplayMemberBinding="{Binding Snippet.SuperChatDetails.Currency}" Width="Auto"/>
+                                    <GridViewColumn Header="送信日時" DisplayMemberBinding="{Binding Snippet.PublishedAt}" Width="Auto"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="{DynamicResource LiveChat_History}">
+                    <Grid x:Name="HistoryGrid">
+                        <ListView Grid.Row="0" Grid.Column="0" Name="History" GridViewColumnHeader.Click="listHeader_Click" HorizontalAlignment="Stretch" FontSize="16">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="{x:Type ListViewItem}">
+                                    <Setter Property="Background" Value="{Binding color}"/>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="ユーザー" DisplayMemberBinding="{Binding AuthorDetails.DisplayName}" Width="100"/>
+                                    <GridViewColumn Header="コメント" DisplayMemberBinding="{Binding Snippet.DisplayMessage}" Width="Auto"/>
+                                    <GridViewColumn Header="送信日時" DisplayMemberBinding="{Binding Snippet.PublishedAt}" Width="Auto"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+            <Grid Margin="5,5,5,5">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBox Grid.Row="0" Grid.Column="0" InputMethod.PreferredImeState="On" Name="CommentInputText" HorizontalAlignment="Stretch" FontSize="16"/>
+                <Button Grid.Row="0" Grid.Column="1" Content="{DynamicResource Send}" Name="SendMessage" Click="SendMessage_Click" HorizontalAlignment="Stretch" FontSize="16"/>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</Window>

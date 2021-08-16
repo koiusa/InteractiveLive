@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_Data:
+    m_SerializedData: []
+  m_GUID: f93fcfda02f963d4d93cf4afd288bb06
+  m_SerializeEntries:
+  - m_GUID: 49c7ec52dd550784fbf6e7a8066a6620
+    m_Address: Assets/Koiusa/Models/Primitive
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Primitive
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: c5cb93b0ee0771b418ad73236af9ce35
+    m_Address: Assets/Koiusa/UI/Prefab/SpeechBubbles.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - LiveChat
+    m_MainAsset: {fileID: 6758774669457474617, guid: c5cb93b0ee0771b418ad73236af9ce35, type: 3}
+    m_TargetAsset: {fileID: 6758774669457474617, guid: c5cb93b0ee0771b418ad73236af9ce35, type: 3}
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: db8f266fb438ff145bfb79eb37db5d96, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 2edec5f47f347ce49b3022e5fc805621, type: 2}
+    - {fileID: 11400000, guid: e4bd39e97d535114ea47379168849882, type: 2}

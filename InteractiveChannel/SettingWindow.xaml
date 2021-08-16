@@ -1,0 +1,53 @@
+﻿<Window x:Class="InteractiveChannel.SettingWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InteractiveChannel"
+        mc:Ignorable="d" d:Width="500"
+      Title="{DynamicResource SettingWindowTitle}" SizeToContent="WidthAndHeight" Loaded="Window_Loaded" Closing="Window_Closing">
+    <Grid >
+        <StackPanel>
+            <TabControl Margin="5,5,5,0" Name="AuthTypeTab">
+                <TabItem Header="{DynamicResource SettingWindow_OAuth2}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition MaxWidth="50"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="AplicationName" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
+                        <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Name="AplicationNameText" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="16"/>
+                        <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Name="OAuthKey" FontSize="16" />
+                        <Button Grid.Row="1" Grid.Column="2" Content="{DynamicResource Reference}" Click="FileReference_Click" FontSize="16"/>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="{DynamicResource SettingWindow_APIKey}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <TextBox Grid.Row="0" Grid.Column="0" Name="ApiKey" HorizontalAlignment="Stretch" FontSize="16"/>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+            <Grid Margin="5,5,5,5">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Row="0" Grid.Column="0" Content="{DynamicResource Apply}" Name="YouTubeApiSettingApply" Click="YouTubeApiSettingApply_Click" HorizontalAlignment="Stretch" FontSize="16"/>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</Window>
