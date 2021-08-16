@@ -9,5 +9,9 @@ This is a Unity project
 
 ## UnityMemoryMappedFile
 This is a project to communicate between Unity and Windows
-The following projects are referenced and adapted for this project.
+The following projects are referenced and adapted for this project.  
 https://github.com/sh-akira/UnityMemoryMappedFile
+
+# How to use
+You will need to obtain approval credentials for use.  
+https://developers.google.com/youtube/registering_an_application
