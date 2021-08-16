@@ -53,7 +53,7 @@ namespace InteractiveChannel
             if (dialog.ShowDialog() == true)
             {
                 var button = (Button)sender;
-                ((Grid)button.Parent).Children.OfType<TextBlock>().First().Text = dialog.FileName;
+                ((Grid)button.Parent).Children.OfType<TextBlock>().Last().Text = dialog.FileName;
             }
         }
 
