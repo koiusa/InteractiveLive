@@ -74,7 +74,7 @@
                     <ColumnDefinition />
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <TextBox Grid.Row="0" Grid.Column="0" InputMethod.PreferredImeState="On" Name="CommentInputText" HorizontalAlignment="Stretch" FontSize="16"/>
+                <TextBox Grid.Row="0" Grid.Column="0" InputMethod.PreferredImeState="On" Text="{Binding SearchText, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" KeyDown="OnKeyDownHandler" Name="CommentInputText" HorizontalAlignment="Stretch" FontSize="16"/>
                 <Button Grid.Row="0" Grid.Column="1" Content="{DynamicResource Send}" Name="SendMessage" Click="SendMessage_Click" HorizontalAlignment="Stretch" FontSize="16"/>
             </Grid>
         </StackPanel>

@@ -89,12 +89,6 @@ namespace InteractiveChannel
 
         public async void StartLive(string videoId)
         {
-            if (string.IsNullOrEmpty(videoId))
-            {
-                System.Diagnostics.Debug.WriteLine("VideoId is Noting!");
-                return;
-            }
-
             CurrentSetting.VideoId = videoId;
             if (CurrentSetting.AuthType.Equals(CurrentSetting.AuthType))
             {
@@ -181,15 +175,17 @@ namespace InteractiveChannel
 
         public string GetLiveChatID(string videoId)
         {
-            //引数で取得したい情報を指定
-            var videosList = youtubeService.Videos.List("snippet,LiveStreamingDetails");
-            videosList.Id = videoId;
-            //動画情報の取得
-            var videoListResponse = videosList.Execute();
-            foreach (var responseVideo in videoListResponse.Items)
-            {
-                onGetLiveStream?.Invoke(responseVideo);
-                return responseVideo.LiveStreamingDetails.ActiveLiveChatId;
+            if (!string.IsNullOrEmpty(videoId)) { 
+                //引数で取得したい情報を指定
+                var videosList = youtubeService.Videos.List("snippet,LiveStreamingDetails");
+                videosList.Id = videoId;
+                //動画情報の取得
+                var videoListResponse = videosList.Execute();
+                foreach (var responseVideo in videoListResponse.Items)
+                {
+                    onGetLiveStream?.Invoke(responseVideo);
+                    return responseVideo.LiveStreamingDetails.ActiveLiveChatId;
+                }
             }
             //動画情報取得できない場合はnullを返す
             System.Diagnostics.Debug.WriteLine("LiveChatID is Null");
@@ -241,26 +237,45 @@ namespace InteractiveChannel
 
         public void SetLiveStream(Video aVideo)
         {
-            var videosList = youtubeService.Videos.List("snippet");
-            videosList.Id = CurrentSetting.VideoId;
-            var videoListResponse = videosList.Execute();
-            var newVideo = videoListResponse.Items.First();
-            newVideo.Snippet.Title = aVideo.Snippet.Title;
-            newVideo.Snippet.Description = aVideo.Snippet.Description;
-            newVideo.Snippet.Tags = new List<string>();
-            var video = youtubeService.Videos.Update(newVideo, "snippet");
-            var videoResponse = video.Execute();
-            onSetLiveStream?.Invoke(videoResponse);
-            System.Diagnostics.Debug.WriteLine("Could not SetLiveStream");
+            if (youtubeService != null)
+            {
+                var videosList = youtubeService.Videos.List("snippet");
+                videosList.Id = CurrentSetting.VideoId;
+                var videoListResponse = videosList.Execute();
+                var newVideo = videoListResponse.Items.First();
+                newVideo.Snippet.Title = aVideo.Snippet.Title;
+                newVideo.Snippet.Description = aVideo.Snippet.Description;
+                newVideo.Snippet.Tags = new List<string>();
+                var video = youtubeService.Videos.Update(newVideo, "snippet");
+                var videoResponse = video?.Execute();
+                onSetLiveStream?.Invoke(videoResponse);
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine("Could not SetLiveStream");
+            }
         }
 
         public void InsertLiveChat(LiveChatMessage aLiveChat)
         {
-            aLiveChat.Snippet.LiveChatId = GetLiveChatID(CurrentSetting.VideoId);
-            aLiveChat.Snippet.Type = LiveChatMessageType.TextMessageEvent;
-            var livechat = youtubeService.LiveChatMessages.Insert(aLiveChat, "snippet");
-            var livechatResponse = livechat.Execute();
-            System.Diagnostics.Debug.WriteLine("Could not InsertLiveChat");
+            if (youtubeService != null)
+            {
+                if (!string.IsNullOrEmpty(aLiveChat.Snippet.TextMessageDetails.MessageText))
+                {
+                    aLiveChat.Snippet.LiveChatId = GetLiveChatID(CurrentSetting.VideoId);
+                    aLiveChat.Snippet.Type = LiveChatMessageType.TextMessageEvent;
+                    var livechat = youtubeService.LiveChatMessages.Insert(aLiveChat, "snippet");
+                    var livechatResponse = livechat?.Execute();
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine("TextMessageDetails.MessageText is Null!");
+                }
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine("Could not InsertLiveChat");
+            }
         }
     }
 }

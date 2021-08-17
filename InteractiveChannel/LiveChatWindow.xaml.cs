@@ -6,6 +6,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Input;
 using System.Windows.Media;
 using UnityMemoryMappedFile;
 
@@ -48,21 +49,9 @@ namespace InteractiveChannel
             }
         }
 
-        private async void SendMessage_Click(object sender, RoutedEventArgs e)
+        private void SendMessage_Click(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("SendButton_Click");
-            var liveChatMessage = new LiveChatMessage
-            {
-                Snippet = new LiveChatMessageSnippet
-                {
-                    TextMessageDetails = new LiveChatTextMessageDetails
-                    {
-                        MessageText = CommentInputText.Text
-                    }
-                }
-            };
-            Globals.YouTubeApi.InsertLiveChat(liveChatMessage);
-            await Globals.Client.SendCommandAsync(new PipeCommands.SendMessage { Message = CommentInputText.Text });
+            SendLiveChatMessage();
         }
 
         private object GetListViewItem(object row, IList<string> path)
@@ -109,20 +98,19 @@ namespace InteractiveChannel
                     {
                         var pathchain = new List<string>(path.Split("."));
                         return GetListViewItem(row, pathchain);
-                    });
+                    }).ToArray();
 
                     if (sorted_items.SequenceEqual(pre_sort_items))
                     {
                         sorted_items.Reverse();
                     }
 
-                    listview.ItemsSource = sorted_items;
+                    listview.ItemsSource = new ObservableCollection<LiveChatMessage>(sorted_items);
                 }
             }
         }
 
 
-        #region FOR_DEBUG
         private async void OnLiveChatMessage(LiveChatMessage liveChatMessage)
         {
             var timeline = (ObservableCollection<LiveChatMessage>)TimeLine.ItemsSource;
@@ -210,6 +198,30 @@ namespace InteractiveChannel
             }
             return null;
         }
-        #endregion
+
+        private void OnKeyDownHandler(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return && (Keyboard.GetKeyStates(Key.LeftCtrl) & KeyStates.Down) == KeyStates.Down)
+            {
+                SendLiveChatMessage();
+            }
+        }
+
+        private void SendLiveChatMessage()
+        {
+            System.Diagnostics.Debug.WriteLine("SendLiveChatMessage");
+            var liveChatMessage = new LiveChatMessage
+            {
+                Snippet = new LiveChatMessageSnippet
+                {
+                    TextMessageDetails = new LiveChatTextMessageDetails
+                    {
+                        MessageText = CommentInputText.Text
+                    }
+                }
+            };
+            Globals.YouTubeApi.InsertLiveChat(liveChatMessage);
+            CommentInputText.Text = null;
+        }
     }
 }
