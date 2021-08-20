@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Koiusa/Scenes/InteractiveRoom.unity
+    path: Assets/Koiusa/Scenes/Room.unity
     guid: ee8e45e9837b08a48b941189d312cec8
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 592a65645a2e90c42b5a4df1a673d064, type: 2}
