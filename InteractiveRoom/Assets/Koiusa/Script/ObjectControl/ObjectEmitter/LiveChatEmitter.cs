@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -45,7 +44,7 @@ namespace Koiusa.InteractiveRoom
                     speechbubbles.transform.parent = canvas.transform;
                     speechbubbles.transform.localScale = Vector3.one;
                     speechbubbles.transform.rotation = Quaternion.identity;
-                    speechbubbles.transform.Find("Frame/Strings").GetComponent<TextMeshPro>().text = liveChatComment;
+                    speechbubbles.transform.Find("Frame/Strings").GetComponent<Text>().text = liveChatComment;
                     if (!string.IsNullOrEmpty(authorUrl))
                     {
                         var icon = speechbubbles.transform.Find("Icon").gameObject.AddComponent<ChannelIcon>();

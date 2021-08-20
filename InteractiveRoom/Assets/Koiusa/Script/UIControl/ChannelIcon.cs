@@ -42,7 +42,7 @@ public class ChannelIcon : MonoBehaviour
                 image.sprite = sprite;
                 rectTransform.transform.localPosition = Vector3.zero;
                 rectTransform.transform.rotation = Quaternion.identity;
-                rectTransform.transform.localScale = Vector3.one * 100; 
+                rectTransform.transform.localScale = Vector3.one * 20; 
             }
             else
             {
