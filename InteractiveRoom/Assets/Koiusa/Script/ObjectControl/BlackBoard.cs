@@ -9,9 +9,6 @@ namespace Koiusa.InteractiveRoom
     public class BlackBoard : MonoBehaviour
     {
         [SerializeField]
-        private MemoryMappedFileController _controlWPFWindow = null;
-
-        [SerializeField]
         private ObjectEmitter _objectEmitter = null;
 
         [SerializeField]
