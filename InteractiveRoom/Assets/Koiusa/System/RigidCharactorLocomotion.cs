@@ -1,3 +1,6 @@
+/// Reference
+/// https://gametukurikata.com/program/rigidbodyandcollider
+///
 using UnityEngine;
 using System.Collections;
 

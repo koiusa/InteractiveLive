@@ -15,3 +15,8 @@ https://github.com/sh-akira/UnityMemoryMappedFile
 # How to use
 You will need to obtain approval credentials for use.  
 https://developers.google.com/youtube/registering_an_application
+
+
+# OSS and other licenses
+![© Unity Technologies Japan/UCL](https://unity-chan.com/images/imageLicenseLogo.png "© Unity Technologies Japan/UCL")
+<br>この作品は[ユニティちゃんライセンス条項](https://unity-chan.com/contents/license_jp/)の元に提供されています
