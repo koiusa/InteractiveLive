@@ -110,7 +110,7 @@ namespace Koiusa.InteractiveRoom
 				}
 
 				//　接地したので移動速度を0にする
-				//velocity = Vector3.zero;
+				velocity = Vector3.zero;
 
 				//　方向キーが多少押されている
 				if (movingDirecion.magnitude > 0f)
@@ -118,16 +118,6 @@ namespace Koiusa.InteractiveRoom
 					//animator.SetFloat(_animIDSpeed, movingDirecion.magnitude);
 					//transform.LookAt(rigid.position + movingDirecion.normalized);
 
-					//前フレームとの位置の差から進行方向を割り出してその方向に回転します。
-					Vector3 differenceDis = new Vector3(transform.position.x, 0, transform.position.z) - new Vector3(_latestPos.x, 0, _latestPos.z);
-					_latestPos = transform.position;
-					if (Mathf.Abs(differenceDis.x) > 0.001f || Mathf.Abs(differenceDis.z) > 0.001f)
-					{
-						if (movingDirecion == Vector3.zero) return;
-						Quaternion rot = Quaternion.LookRotation(differenceDis);
-						rot = Quaternion.Slerp(rigid.transform.rotation, rot, 0.2f);
-						//this.transform.rotation = rot;
-					}
 					rigid.AddTorque(roleDirecion.normalized);
 
 					var stepRayPosition = rigid.position + stepRayOffset;
@@ -156,7 +146,7 @@ namespace Koiusa.InteractiveRoom
 					}
 					else
 					{
-						velocity = transform.forward * walkSpeed;
+						velocity = movingDirecion.normalized * walkSpeed;
 					}
 
 					//　キーの押しが小さすぎる場合は移動しない
@@ -187,7 +177,7 @@ namespace Koiusa.InteractiveRoom
 			//rigid.MovePosition(rigid.position + velocity * Time.fixedDeltaTime);
 			if (!_input.jump)
 			{
-				rigid.AddForce(rigid.rotation * movingDirecion.normalized * SpeedChangeRate, ForceMode.Force);
+				rigid.AddForce(rigid.rotation * velocity * SpeedChangeRate, ForceMode.Force);
 			}
 
 			Move();
