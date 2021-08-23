@@ -3,6 +3,8 @@
 ///
 using UnityEngine;
 using System.Collections;
+using UnityEngine.InputSystem;
+using StarterAssets;
 
 namespace Koiusa.InteractiveRoom
 {
@@ -10,19 +12,26 @@ namespace Koiusa.InteractiveRoom
 	[RequireComponent(typeof(Rigidbody))]
 	public class RigidCharactorLocomotion : MonoBehaviour
 	{
+		private StarterAssetsInputs _input;
 
-		private Animator animator;
+		private Animator _animator;
 		private Vector3 velocity;
 		[SerializeField]
 		private float jumpPower = 5f;
+		[Range(0.0f, 0.3f)]
+		public float RotationSmoothTime = 0.12f;
 		//　地面に接地しているかどうか
 		[SerializeField]
 		private bool isGrounded;
 		//　入力値
-		private Vector3 input;
+		private Vector3 movingDirecion;
+		private Vector3 roleDirecion;
 		//　歩く速さ
 		[SerializeField]
 		private float walkSpeed = 1.5f;
+		[SerializeField]
+		public float SprintSpeed = 5.335f;
+		public float SpeedChangeRate = 10.0f;
 		//　rigidbody
 		private Rigidbody rigid;
 		//　レイヤーマスク
@@ -44,15 +53,49 @@ namespace Koiusa.InteractiveRoom
 		[SerializeField]
 		private float slopeDistance = 0.6f;
 
+		// player
+		private float _speed;
+		private float _animationBlend;
+		private float _targetRotation = 0.0f;
+		private float _rotationVelocity;
+		private float _verticalVelocity;
+		private float _terminalVelocity = 53.0f;
+
+		// animation IDs
+		private int _animIDSpeed;
+		private int _animIDGrounded;
+		private int _animIDJump;
+		private int _animIDFreeFall;
+		private int _animIDMotionSpeed;
+
+		private bool _hasAnimator;
+		private Vector3 _latestPos;
+		private GameObject _mainCamera;
+		private void AssignAnimationIDs()
+		{
+			_animIDSpeed = Animator.StringToHash("Speed");
+			_animIDGrounded = Animator.StringToHash("Grounded");
+			_animIDJump = Animator.StringToHash("Jump");
+			_animIDFreeFall = Animator.StringToHash("FreeFall");
+			_animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
+		}
+
 		void Start()
 		{
-			animator = GetComponent<Animator>();
+			if (_mainCamera == null)
+			{
+				_mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+			}
+			AssignAnimationIDs();
+			_hasAnimator = TryGetComponent(out _animator);
 			rigid = GetComponent<Rigidbody>();
+			_input = GetComponent<StarterAssetsInputs>();
 		}
 
 		void Update()
 		{
-
+			movingDirecion = new Vector3(_input.move.x, 0f, _input.move.y);
+			roleDirecion = new Vector3(0, _input.move.x, -_input.move.x);
 		}
 
 		void FixedUpdate()
@@ -60,15 +103,32 @@ namespace Koiusa.InteractiveRoom
 			//　キャラクターが接地している場合
 			if (isGrounded)
 			{
+				if (_hasAnimator)
+				{
+					_animator.SetBool(_animIDJump, false);
+					_animator.SetBool(_animIDFreeFall, false);
+				}
+
 				//　接地したので移動速度を0にする
-				velocity = Vector3.zero;
-				input = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
+				//velocity = Vector3.zero;
 
 				//　方向キーが多少押されている
-				if (input.magnitude > 0f)
+				if (movingDirecion.magnitude > 0f)
 				{
-					animator.SetFloat("Speed", input.magnitude);
-					transform.LookAt(rigid.position + input.normalized);
+					//animator.SetFloat(_animIDSpeed, movingDirecion.magnitude);
+					//transform.LookAt(rigid.position + movingDirecion.normalized);
+
+					//前フレームとの位置の差から進行方向を割り出してその方向に回転します。
+					Vector3 differenceDis = new Vector3(transform.position.x, 0, transform.position.z) - new Vector3(_latestPos.x, 0, _latestPos.z);
+					_latestPos = transform.position;
+					if (Mathf.Abs(differenceDis.x) > 0.001f || Mathf.Abs(differenceDis.z) > 0.001f)
+					{
+						if (movingDirecion == Vector3.zero) return;
+						Quaternion rot = Quaternion.LookRotation(differenceDis);
+						rot = Quaternion.Slerp(rigid.transform.rotation, rot, 0.2f);
+						//this.transform.rotation = rot;
+					}
+					rigid.AddTorque(roleDirecion.normalized);
 
 					var stepRayPosition = rigid.position + stepRayOffset;
 
@@ -103,23 +163,34 @@ namespace Koiusa.InteractiveRoom
 				}
 				else
 				{
-					animator.SetFloat("Speed", 0f);
+					_animator.SetFloat(_animIDSpeed, 0f);
 				}
 				//　ジャンプ
-				if (Input.GetButtonDown("Jump")
-					&& !animator.GetCurrentAnimatorStateInfo(0).IsName("Jump")
-					&& !animator.IsInTransition(0)      //　遷移途中にジャンプさせない条件
+				if (_input.jump
+					&& !_animator.GetCurrentAnimatorStateInfo(0).IsName("Jump")
+					&& !_animator.IsInTransition(0)      //　遷移途中にジャンプさせない条件
 				)
 				{
-					animator.SetTrigger("Jump");
+					_animator.SetTrigger(_animIDJump);
 					//　ジャンプしたら接地していない状態にする
 					isGrounded = false;
-					animator.SetBool("IsGrounded", isGrounded);
-					velocity.y = jumpPower;
+					_animator.SetBool(_animIDGrounded, isGrounded);
+					//velocity.y = jumpPower;
+					rigid.AddForce(transform.up * jumpPower, ForceMode.Impulse);
 				}
-			}
+            }
+            else
+            {
+				_input.jump = false;
+            }
 			//　キャラクターを移動させる処理
-			rigid.MovePosition(rigid.position + velocity * Time.fixedDeltaTime);
+			//rigid.MovePosition(rigid.position + velocity * Time.fixedDeltaTime);
+			if (!_input.jump)
+			{
+				rigid.AddForce(rigid.rotation * movingDirecion.normalized * SpeedChangeRate, ForceMode.Force);
+			}
+
+			Move();
 		}
 
 		private void OnCollisionEnter(Collision collision)
@@ -128,7 +199,7 @@ namespace Koiusa.InteractiveRoom
 			if (Physics.CheckSphere(rigid.position, 0.3f, layerMask))
 			{
 				isGrounded = true;
-				animator.SetBool("IsGrounded", isGrounded);
+				_animator.SetBool(_animIDGrounded, isGrounded);
 				velocity.y = 0f;
 			}
 		}
@@ -143,7 +214,7 @@ namespace Koiusa.InteractiveRoom
 				if (!Physics.Linecast(rigid.position + Vector3.up * 0.2f, rigid.position + Vector3.down * 0.3f, layerMask))
 				{
 					isGrounded = false;
-					animator.SetBool("IsGrounded", isGrounded);
+					_animator.SetBool(_animIDGrounded, isGrounded);
 				}
 			}
 		}
@@ -155,6 +226,67 @@ namespace Koiusa.InteractiveRoom
 			Gizmos.DrawLine(stepRayPosition, stepRayPosition + transform.forward * stepDistance);
 			Gizmos.color = Color.green;
 			Gizmos.DrawLine(transform.position + new Vector3(0f, stepOffset, 0f), transform.position + new Vector3(0f, stepOffset, 0f) + transform.forward * slopeDistance);
+		}
+
+		private void Move()
+		{
+			// set target speed based on move speed, sprint speed and if sprint is pressed
+			float targetSpeed = _input.sprint ? SprintSpeed : walkSpeed;
+
+			// a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
+
+			// note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
+			// if there is no input, set the target speed to 0
+			if (_input.move == Vector2.zero) targetSpeed = 0.0f;
+
+			// a reference to the players current horizontal velocity
+			float currentHorizontalSpeed = new Vector3(rigid.velocity.x, 0.0f, rigid.velocity.z).magnitude;
+
+			float speedOffset = 0.1f;
+			float inputMagnitude = _input.analogMovement ? _input.move.magnitude : 1f;
+
+			// accelerate or decelerate to target speed
+			if (currentHorizontalSpeed < targetSpeed - speedOffset || currentHorizontalSpeed > targetSpeed + speedOffset)
+			{
+				// creates curved result rather than a linear one giving a more organic speed change
+				// note T in Lerp is clamped, so we don't need to clamp our speed
+				_speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed * inputMagnitude, Time.deltaTime * SpeedChangeRate);
+
+				// round speed to 3 decimal places
+				_speed = Mathf.Round(_speed * 1000f) / 1000f;
+			}
+			else
+			{
+				_speed = targetSpeed;
+			}
+			_animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * SpeedChangeRate);
+
+			// normalise input direction
+			Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
+
+			// note: Vector2's != operator uses approximation so is not floating point error prone, and is cheaper than magnitude
+			// if there is a move input rotate player when the player is moving
+			////if (_input.move != Vector2.zero)
+			////{
+			////	_targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg + _mainCamera.transform.eulerAngles.y;
+			////	float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity, RotationSmoothTime);
+
+			////	// rotate to face input direction relative to camera position
+			////	transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+			////}
+
+
+			Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
+
+			// move the player
+			//_controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+
+			// update animator if using character
+			if (_hasAnimator)
+			{
+				_animator.SetFloat(_animIDSpeed, _animationBlend);
+				_animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
+			}
 		}
 	}
 }
