@@ -33,7 +33,7 @@ namespace Koiusa.InteractiveRoom
 		public float SprintSpeed = 5.335f;
 		public float SpeedChangeRate = 10.0f;
 		//　rigidbody
-		private Rigidbody rigid;
+		private Rigidbody _rigid;
 		//　レイヤーマスク
 		[SerializeField]
 		private LayerMask layerMask;
@@ -88,7 +88,7 @@ namespace Koiusa.InteractiveRoom
 			}
 			AssignAnimationIDs();
 			_hasAnimator = TryGetComponent(out _animator);
-			rigid = GetComponent<Rigidbody>();
+			_rigid = GetComponent<Rigidbody>();
 			_input = GetComponent<StarterAssetsInputs>();
 		}
 
@@ -118,21 +118,21 @@ namespace Koiusa.InteractiveRoom
 					//animator.SetFloat(_animIDSpeed, movingDirecion.magnitude);
 					//transform.LookAt(rigid.position + movingDirecion.normalized);
 
-					rigid.AddTorque(roleDirecion.normalized);
+					_rigid.AddTorque(roleDirecion.normalized);
 
-					var stepRayPosition = rigid.position + stepRayOffset;
+					var stepRayPosition = _rigid.position + stepRayOffset;
 
 					//　ステップ用のレイが地面に接触しているかどうか
-					if (Physics.Linecast(stepRayPosition, stepRayPosition + rigid.transform.forward * stepDistance, out var stepHit, layerMask))
+					if (Physics.Linecast(stepRayPosition, stepRayPosition + _rigid.transform.forward * stepDistance, out var stepHit, layerMask))
 					{
 						//　進行方向の地面の角度が指定以下、または昇れる段差より下だった場合の移動処理
 
-						if (Vector3.Angle(rigid.transform.up, stepHit.normal) <= slopeLimit
-						|| (Vector3.Angle(rigid.transform.up, stepHit.normal) > slopeLimit
-							&& !Physics.Linecast(rigid.position + new Vector3(0f, stepOffset, 0f), rigid.position + new Vector3(0f, stepOffset, 0f) + rigid.transform.forward * slopeDistance, layerMask))
+						if (Vector3.Angle(_rigid.transform.up, stepHit.normal) <= slopeLimit
+						|| (Vector3.Angle(_rigid.transform.up, stepHit.normal) > slopeLimit
+							&& !Physics.Linecast(_rigid.position + new Vector3(0f, stepOffset, 0f), _rigid.position + new Vector3(0f, stepOffset, 0f) + _rigid.transform.forward * slopeDistance, layerMask))
 						)
 						{
-							velocity = new Vector3(0f, (Quaternion.FromToRotation(Vector3.up, stepHit.normal) * rigid.transform.forward * walkSpeed).y, 0f) + rigid.transform.forward * walkSpeed;
+							velocity = new Vector3(0f, (Quaternion.FromToRotation(Vector3.up, stepHit.normal) * _rigid.transform.forward * walkSpeed).y, 0f) + _rigid.transform.forward * walkSpeed;
 						}
 						else
 						{
@@ -166,7 +166,7 @@ namespace Koiusa.InteractiveRoom
 					isGrounded = false;
 					_animator.SetBool(_animIDGrounded, isGrounded);
 					//velocity.y = jumpPower;
-					rigid.AddForce(transform.up * jumpPower, ForceMode.Impulse);
+					_rigid.AddForce(transform.up * jumpPower, ForceMode.Impulse);
 				}
             }
             else
@@ -177,7 +177,7 @@ namespace Koiusa.InteractiveRoom
 			//rigid.MovePosition(rigid.position + velocity * Time.fixedDeltaTime);
 			if (!_input.jump)
 			{
-				rigid.AddForce(rigid.rotation * velocity * SpeedChangeRate, ForceMode.Force);
+				_rigid.AddForce(_rigid.rotation * velocity * SpeedChangeRate, ForceMode.Force);
 			}
 
 			Move();
@@ -186,7 +186,7 @@ namespace Koiusa.InteractiveRoom
 		private void OnCollisionEnter(Collision collision)
 		{
 			//　地面に着地したかどうかの判定
-			if (Physics.CheckSphere(rigid.position, 0.3f, layerMask))
+			if (Physics.CheckSphere(_rigid.position, 0.3f, layerMask))
 			{
 				isGrounded = true;
 				_animator.SetBool(_animIDGrounded, isGrounded);
@@ -201,7 +201,7 @@ namespace Koiusa.InteractiveRoom
 			if (1 << collision.gameObject.layer == layerMask)
 			{
 				//　下向きにレイヤーを飛ばし地面とするレイヤーと接触しなければ地面から離れたと判定する
-				if (!Physics.Linecast(rigid.position + Vector3.up * 0.2f, rigid.position + Vector3.down * 0.3f, layerMask))
+				if (!Physics.Linecast(_rigid.position + Vector3.up * 0.2f, _rigid.position + Vector3.down * 0.3f, layerMask))
 				{
 					isGrounded = false;
 					_animator.SetBool(_animIDGrounded, isGrounded);
@@ -230,7 +230,7 @@ namespace Koiusa.InteractiveRoom
 			if (_input.move == Vector2.zero) targetSpeed = 0.0f;
 
 			// a reference to the players current horizontal velocity
-			float currentHorizontalSpeed = new Vector3(rigid.velocity.x, 0.0f, rigid.velocity.z).magnitude;
+			float currentHorizontalSpeed = new Vector3(_rigid.velocity.x, 0.0f, _rigid.velocity.z).magnitude;
 
 			float speedOffset = 0.1f;
 			float inputMagnitude = _input.analogMovement ? _input.move.magnitude : 1f;
