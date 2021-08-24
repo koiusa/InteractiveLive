@@ -234,9 +234,8 @@ namespace Koiusa.InteractiveRoom
 			// move the player
 			if (Grounded)
 			{
-				_rigid.velocity = _rigid.transform.forward * targetSpeed;
+				_rigid.velocity = targetDirection.normalized * targetSpeed + new Vector3(0.0f, _verticalVelocity, 0.0f);
 			}
-			_rigid.AddForce(new Vector3(0.0f, _verticalVelocity, 0.0f), ForceMode.Force);
 
 			// update animator if using character
 			if (_hasAnimator)
