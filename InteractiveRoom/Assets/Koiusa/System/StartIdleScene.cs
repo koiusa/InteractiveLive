@@ -17,15 +17,15 @@ public class StartIdleScene : MonoBehaviour
 
     private void Update()
     {
-        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        if (Keyboard.current.anyKey.wasPressedThisFrame)
         {
-            task.Invoke();
+            task?.Invoke();
         }
     }
 
     void ChangeScene()
     {
-        //SceneManager.LoadScene("InteractiveRoom");
+        task -= ChangeScene;
         FadeManager.Instance.LoadScene("InteractiveRoom", 1.0f);
     }
 }
