@@ -3,13 +3,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
+using UnityEngine.Events;
 
 public class StartIdleScene : MonoBehaviour
 {
+    UnityAction task;
     // Use this for initialization
     void Start()
     {
-        Invoke("ChangeScene", 1.5f);
+        task = ChangeScene;
+    }
+
+    private void Update()
+    {
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        {
+            task.Invoke();
+        }
     }
 
     void ChangeScene()
