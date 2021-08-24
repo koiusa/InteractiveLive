@@ -12,10 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7fd9488000d3734a9e00ee676215985, type: 3}
   m_Name: UnityLogo-SceneSettings
   m_EditorClassIdentifier: 
-  components:
-  - {fileID: 114620464681705026}
-  - {fileID: 114365372121065390}
-  - {fileID: 114257510638711138}
+  components: []
 --- !u!114 &114257510638711138
 MonoBehaviour:
   m_ObjectHideFlags: 3
