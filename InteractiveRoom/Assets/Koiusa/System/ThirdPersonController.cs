@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 namespace Koiusa.InteractiveRoom
 {
-	[RequireComponent(typeof(CharacterController))]
+	[RequireComponent(typeof(Rigidbody))]
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 	[RequireComponent(typeof(PlayerInput))]
 #endif
