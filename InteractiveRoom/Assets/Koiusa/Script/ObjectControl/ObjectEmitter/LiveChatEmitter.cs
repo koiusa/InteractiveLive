@@ -20,7 +20,6 @@ namespace Koiusa.InteractiveRoom
             _objectLoader = gameObject.GetComponent<ObjectLoader>();
             _objectLoader.OnLoaded += GetPrefab;
             canvas = FindObjectsOfType<Canvas>()[0];
-            var rootGameObjects = SceneManager.GetActiveScene().GetRootGameObjects();
         }
 
         private void GetPrefab(IList<Object> objects)
@@ -50,6 +49,16 @@ namespace Koiusa.InteractiveRoom
                         var icon = speechbubbles.transform.Find("Icon").gameObject.AddComponent<ChannelIcon>();
                         icon.CreateThumbnail(authorUrl);
                     }
+                }
+            }
+        }
+
+        public void DestoroyGameObject()
+        {
+            if (canvas.transform.hasChanged) {
+                foreach (Transform uifollow in canvas.transform)
+                {
+                    Destroy(uifollow.gameObject);
                 }
             }
         }

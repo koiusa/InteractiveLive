@@ -24,14 +24,17 @@ namespace Koiusa.InteractiveRoom
 
 		void Update()
 		{
-			var pos = Vector2.zero;
-			var uiCamera = Camera.main;
-			var worldCamera = Camera.main;
-			var canvasRect = canvas.GetComponent<RectTransform>();
+			if (target != null)
+			{
+				var pos = Vector2.zero;
+				var uiCamera = Camera.main;
+				var worldCamera = Camera.main;
+				var canvasRect = canvas.GetComponent<RectTransform>();
 
-			var screenPos = RectTransformUtility.WorldToScreenPoint(worldCamera, target.position);
-			RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRect, screenPos, uiCamera, out pos);
-			rectTransform.localPosition = pos;
+				var screenPos = RectTransformUtility.WorldToScreenPoint(worldCamera, target.position);
+				RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRect, screenPos, uiCamera, out pos);
+				rectTransform.localPosition = pos;
+            }
 		}
 	}
 }

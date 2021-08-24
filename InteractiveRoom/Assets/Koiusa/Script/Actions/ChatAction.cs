@@ -35,6 +35,7 @@ namespace Koiusa.InteractiveRoom
         public void Destroy()
         {
             _blackBorad.GetObjectEmitter.DestroyGameObject();
+            _blackBorad.GetLiveChatEmitter.DestoroyGameObject();
         }
 
         private string SimulateComment()

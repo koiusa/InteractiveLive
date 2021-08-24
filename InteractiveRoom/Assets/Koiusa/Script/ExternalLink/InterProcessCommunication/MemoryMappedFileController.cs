@@ -76,11 +76,6 @@ namespace Koiusa.InteractiveRoom
         {
             var d = (PipeCommands.SendMessage)e.Data;
             Debug.Log($"[Server]ReceiveFromClient:{d.Message}");
-            _externalLinkThread.BeginInvoke(() => //別スレッドで処理
-            {
-                var Action = new ChatAction(_blackBorad);
-                Action.GetLiveChatComment(d.Message,null);
-            });
         }
 
         private void MoveObject(PipeCommands.MoveObject command, DataReceivedEventArgs e)
