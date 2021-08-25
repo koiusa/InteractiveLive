@@ -234,7 +234,7 @@ namespace Koiusa.InteractiveRoom
 			// move the player
 			if (Grounded)
 			{
-				_rigid.velocity = targetDirection.normalized * targetSpeed + new Vector3(0.0f, _verticalVelocity, 0.0f);
+				_rigid.velocity = (targetDirection.normalized * targetSpeed + (Vector3.up * _verticalVelocity));
 			}
 
 			// update animator if using character
@@ -262,7 +262,7 @@ namespace Koiusa.InteractiveRoom
 				// stop our velocity dropping infinitely when grounded
 				if (_verticalVelocity < 0.0f)
 				{
-					_verticalVelocity = -2f;
+					_verticalVelocity = -1f;
 				}
 
 				// Jump

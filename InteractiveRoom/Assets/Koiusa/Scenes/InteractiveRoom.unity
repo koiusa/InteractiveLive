@@ -1876,7 +1876,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1792317208}
-  m_LocalRotation: {x: 0.07924445, y: -0.000000017152276, z: 0.0000000013635106, w: 0.9968552}
+  m_LocalRotation: {x: 0.07924447, y: 0.000000017152264, z: -0.00000000136351, w: 0.9968552}
   m_LocalPosition: {x: 0, y: 1.6, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1913,7 +1913,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.9804469, y: 1}
+    m_SensorSize: {x: 2.148485, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -2797,6 +2797,10 @@ PrefabInstance:
       propertyPath: m_Center.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3712065849651728889, guid: ec706b1b7d4184942b5b459a2ed1ac31, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 0807452e11700e7479e76fb9abc91843, type: 2}
     - target: {fileID: 3712065849651728891, guid: ec706b1b7d4184942b5b459a2ed1ac31, type: 3}
       propertyPath: GroundLayers.m_Bits
       value: 1
@@ -2805,6 +2809,10 @@ PrefabInstance:
       propertyPath: CinemachineCameraTarget
       value: 
       objectReference: {fileID: 1435405819}
+    - target: {fileID: 3712065849651728894, guid: ec706b1b7d4184942b5b459a2ed1ac31, type: 3}
+      propertyPath: m_Drag
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3712065849651728895, guid: ec706b1b7d4184942b5b459a2ed1ac31, type: 3}
       propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
