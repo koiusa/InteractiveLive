@@ -232,10 +232,7 @@ namespace Koiusa.InteractiveRoom
 			Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
 
 			// move the player
-			if (Grounded)
-			{
-				_rigid.velocity = (targetDirection.normalized * targetSpeed + (Vector3.up * _verticalVelocity));
-			}
+			_rigid.velocity = (targetDirection.normalized * targetSpeed + (Vector3.up * _verticalVelocity));
 
 			// update animator if using character
 			if (_hasAnimator)
