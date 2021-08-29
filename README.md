@@ -13,7 +13,8 @@ The following projects are referenced and adapted for this project.
 https://github.com/sh-akira/UnityMemoryMappedFile
 
 # Introducing Assets
-[MusicEngine](https://github.com/geekdrums/MusicEngine)
+[MusicEngine](https://github.com/geekdrums/MusicEngine)  
+[DOTween (HOTween v2)](https://assetstore.unity.com/packages/tools/animation/dotween-hotween-v2-27676)  
 
 # How to use
 You will need to obtain approval credentials for use.  
