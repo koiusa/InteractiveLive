@@ -23,6 +23,11 @@ https://developers.google.com/youtube/registering_an_application
 # OSS and other licenses
 For more information on OSS, please refer to the following links.  
 
+I use UnityMemoryMappedFile by sh-akira.  
+https://github.com/sh-akira/UnityMemoryMappedFile
+
+---
+
 I use MusicEngine by geekdrums.  
 https://github.com/geekdrums/MusicEngine
 
