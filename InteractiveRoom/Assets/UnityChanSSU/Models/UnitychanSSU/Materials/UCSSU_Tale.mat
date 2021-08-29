@@ -9,15 +9,16 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: UCSSU_Tale
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
-  m_ShaderKeywords: 
+  m_ShaderKeywords: _ALPHATEST_ON _RECEIVE_SHADOWS_OFF
   m_LightmapFlags: 6
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2000
+  m_CustomRenderQueue: 3000
   stringTagMap:
     IgnoreProjection: False
-    RenderType: Opaque
-  disabledShaderPasses: []
+    RenderType: Transparent
+  disabledShaderPasses:
+  - SHADOWCASTER
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -188,7 +189,7 @@ Material:
     - _AR_OffsetU: 0
     - _AR_OffsetV: 0.3
     - _Add_Antipodean_RimLight: 0
-    - _AlphaClip: 0
+    - _AlphaClip: 1
     - _AlphaToMask: 0
     - _AngelRing: 0
     - _Ap_RimLight_FeatherOff: 0
@@ -197,7 +198,7 @@ Material:
     - _BaseColor_Step: 0.551
     - _BaseShade_Feather: 0.0001
     - _Base_Speed: 0
-    - _Blend: 0
+    - _Blend: 2
     - _BlendMode: 0
     - _BlendOp: 0
     - _BlurLevelMatcap: 0
@@ -224,7 +225,7 @@ Material:
     - _DistortionEnabled: 0
     - _DistortionStrength: 1
     - _DistortionStrengthScaled: 0.1
-    - _DstBlend: 0
+    - _DstBlend: 1
     - _EMISSIVE: 0
     - _EmissionEnabled: 0
     - _EnvironmentReflections: 1
@@ -293,7 +294,7 @@ Material:
     - _Parallax: 0.005
     - _QueueOffset: 0
     - _ReceiveShadowRate: 1
-    - _ReceiveShadows: 1
+    - _ReceiveShadows: 0
     - _RimFresnelPower: 1
     - _RimLift: 0
     - _RimLight: 0
@@ -320,14 +321,14 @@ Material:
     - _SoftParticlesFarFadeDistance: 1
     - _SoftParticlesNearFadeDistance: 0
     - _SpecularHighlights: 1
-    - _SrcBlend: 1
+    - _SrcBlend: 5
     - _StencilComp: 0
     - _StencilMode: 0
     - _StencilNo: 1
     - _StencilOpFail: 0
     - _StencilOpPass: 0
     - _StepOffset: 0
-    - _Surface: 0
+    - _Surface: 1
     - _TransparentEnabled: 0
     - _TweakHighColorOnShadow: 0
     - _TweakMatCapOnShadow: 0
@@ -347,7 +348,7 @@ Material:
     - _UvAnimScrollY: 0
     - _WorkflowMode: 1
     - _ZOverDrawMode: 0
-    - _ZWrite: 1
+    - _ZWrite: 0
     - _ZWriteMode: 1
     - _simpleUI: 0
     - _utsTechnique: 0
@@ -359,7 +360,7 @@ Material:
     - _2nd_ShadeColor: {r: 1, g: 1, b: 1, a: 1}
     - _AngelRing_Color: {r: 1, g: 1, b: 1, a: 1}
     - _Ap_RimLightColor: {r: 1, g: 1, b: 1, a: 1}
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 0.0627451}
     - _BaseColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
