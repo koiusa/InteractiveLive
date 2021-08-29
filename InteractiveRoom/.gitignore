@@ -61,6 +61,9 @@ crashlytics-build.properties
 # Unity3D Build file
 UnityBuild/
 
+# External Resource
+[Aa]ssets/Sound
+
 # External Assets
 # Get latest from https://github.com/geekdrums/MusicEngine
 [Aa]ssets/MusicEngine
