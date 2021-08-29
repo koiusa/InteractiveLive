@@ -6502,14 +6502,14 @@ MonoBehaviour:
   Sections:
   - Name: Section
     Clips:
-    - {fileID: 8300000, guid: 5056b461087047e42a08efa2e2084ee1, type: 3}
+    - {fileID: 8300000, guid: e8126f948df5681439aa2a4466f17fa5, type: 3}
     Meters:
     - StartBar: 0
-      Tempo: 120
+      Tempo: 260
       UnitPerBeat: 4
       UnitPerBar: 16
-      Numerator: 4
-      Denominator: 4
+      Numerator: 16
+      Denominator: 16
     SyncType: 3
     SyncFactor: 1
     Markers: []
@@ -6518,7 +6518,7 @@ MonoBehaviour:
       Beat: 0
       Unit: 0
     ExitPointTiming:
-      Bar: 62
+      Bar: 466
       Beat: 0
       Unit: 0
     LoopStartTiming:
@@ -6526,7 +6526,7 @@ MonoBehaviour:
       Beat: 0
       Unit: 0
     LoopEndTiming:
-      Bar: 62
+      Bar: 466
       Beat: 0
       Unit: 0
     Transition:
