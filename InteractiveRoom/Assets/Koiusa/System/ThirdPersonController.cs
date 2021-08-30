@@ -57,6 +57,10 @@ namespace Koiusa.InteractiveRoom
 		[Tooltip("For locking the camera position on all axis")]
 		public bool LockCameraPosition = false;
 
+		[Header("Setting")]
+		[Tooltip("If checked, each value will be previewed on the screen.")]
+		public bool DebugView = false;
+
 		//　前方に段差があるか調べるレイを飛ばすオフセット位置
 		[SerializeField]
 		private Vector3 stepRayOffset = new Vector3(0f, 0.05f, 0f);
@@ -333,12 +337,15 @@ namespace Koiusa.InteractiveRoom
 
 		void OnGUI()
 		{
-			GUILayout.Label($"_speed: {_speed}");
-			GUILayout.Label($"_animationBlend: {_animationBlend}");
-			GUILayout.Label($"_verticalVelocity: {_verticalVelocity}");
-			GUILayout.Label($"_horizontalVelocity: {_horizontalVelocity}");
-			GUILayout.Label($"_input.move: {_input.move.normalized}");
-			GUILayout.Label($"_rigid.velocity: {_rigid.velocity}");
+			if (DebugView)
+			{
+				GUILayout.Label($"_speed: {_speed}");
+				GUILayout.Label($"_animationBlend: {_animationBlend}");
+				GUILayout.Label($"_verticalVelocity: {_verticalVelocity}");
+				GUILayout.Label($"_horizontalVelocity: {_horizontalVelocity}");
+				GUILayout.Label($"_input.move: {_input.move.normalized}");
+				GUILayout.Label($"_rigid.velocity: {_rigid.velocity}");
+			}
 		}
 	}
 }
