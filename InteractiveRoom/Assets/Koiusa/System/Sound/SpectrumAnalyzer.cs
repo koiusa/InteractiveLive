@@ -20,6 +20,7 @@ public class SpectrumAnalyzer : MonoBehaviour
     private MusicUnity _musicUnity;
 
     float[] spectrum = new float[SampleCount];
+    float[] samples = new float[SampleCount];
 
     public float[] Hz { get; set; }
     public float[] DbfsPerHz { get; set; }
@@ -31,6 +32,7 @@ public class SpectrumAnalyzer : MonoBehaviour
     {
         _musicUnity = GetComponent<MusicUnity>();
         _audio = _musicUnity.transform.Find("audioSource_0").GetComponent<AudioSource>();
+        Peak = 0;
     }
 
     void Update()
@@ -38,6 +40,7 @@ public class SpectrumAnalyzer : MonoBehaviour
         if (_musicUnity.State == Music.PlayState.Playing)
         {
             _audio.GetSpectrumData(spectrum, 0, FFTWindow.Hamming);
+            _audio.GetOutputData(samples, 0);
             //for (int i = 1; i < spectrum.Length - 1; ++i)
             //{
             //    Debug.DrawLine(
@@ -68,15 +71,11 @@ public class SpectrumAnalyzer : MonoBehaviour
 
     private float CalcDecibel()
     {
-        float[] samples = new float[SampleCount];
-
-        _audio.GetOutputData(samples, 0);
         var sum = 0.0f;
         foreach (var sample in samples)
         {
             sum += sample * sample;
         }
-
         var rmsValue = Mathf.Sqrt(sum / SampleCount);
         var dbValue = 20.0f * Mathf.Log10(rmsValue);
         dbValue = Mathf.Clamp(dbValue, ClampBottom, float.MaxValue);
@@ -86,20 +85,16 @@ public class SpectrumAnalyzer : MonoBehaviour
     private float[] CalcDecibelPerHz()
     {
         float[] dbValue = new float[SampleCount];
-        float[] samples = new float[SampleCount];
 
-        _audio.GetOutputData(samples, 0);
         int i = 0;
         foreach (var sample in samples)
         {
             var pow = sample * sample;
-            var rmsValue = Mathf.Sqrt(pow / SampleCount);
+            var rmsValue = Mathf.Sqrt(pow);
             dbValue[i] = 20.0f * Mathf.Log10(rmsValue);
             dbValue[i] = Mathf.Clamp(dbValue[i], ClampBottom, float.MaxValue);
             i++;
         }
-
-
         return dbValue;
     }
 
@@ -170,6 +165,8 @@ public class SpectrumAnalyzer : MonoBehaviour
                 GUILayout.Label($"Pitch: {Pitch}");
                 GUILayout.Label($"Peak: {Peak}");
                 GUILayout.Label($"CurrentPeak: {CurrentPeak}");
+                GUILayout.Label($"spectrum: {spectrum[DebugView_Hz]}");
+                GUILayout.Label($"samples: {samples[DebugView_Hz]}");
             }
         }
     }
