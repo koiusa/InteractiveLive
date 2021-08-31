@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UIElements;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(AudioSource))]
 public class SpectrumAnalyzer : MonoBehaviour
@@ -8,13 +9,12 @@ public class SpectrumAnalyzer : MonoBehaviour
     [Header("Setting")]
     [Tooltip("If checked, each value will be previewed on the screen.")]
     public bool DebugView = false;
-    [SerializeField, Range(0, SampleCount-1)]
+    [SerializeField, Range(0, SampleCount - 1)]
     private uint DebugView_Hz = 0;
 
     private const uint SampleCount = 1024;
     private const float ClampBottom = -80.0f;
     private const float FalldownPerTick = 0.1f;
-    private const float LevelRange = 5.0f;
 
     private AudioSource _audio;
     private MusicUnity _musicUnity;
@@ -22,12 +22,14 @@ public class SpectrumAnalyzer : MonoBehaviour
     float[] spectrum = new float[SampleCount];
     float[] samples = new float[SampleCount];
 
+    List<float> prevDbfs = new List<float>();
+    List<float> prevPich = new List<float>();
+
     public float[] Hz { get; set; }
     public float[] DbfsPerHz { get; set; }
     public float Pitch { get; set; }
     public float Dbfs { get; set; }
     public float Peak { get; set; }
-    public float CurrentPeak { get; set; }
     void Start()
     {
         _musicUnity = GetComponent<MusicUnity>();
@@ -64,7 +66,8 @@ public class SpectrumAnalyzer : MonoBehaviour
             DbfsPerHz = CalcDecibelPerHz();
             Pitch = CalcPitch(spectrum);
             Dbfs = CalcDecibel();
-            CurrentPeak = CalcPeakFallDownValue(Dbfs);
+            Peak = CalcPeakFallDownValue(Dbfs);
+            WaveVisualize();
         }
 
     }
@@ -79,7 +82,7 @@ public class SpectrumAnalyzer : MonoBehaviour
         var rmsValue = Mathf.Sqrt(sum / SampleCount);
         var dbValue = 20.0f * Mathf.Log10(rmsValue);
         dbValue = Mathf.Clamp(dbValue, ClampBottom, float.MaxValue);
-        return dbValue;
+        return dbValue + Mathf.Abs(ClampBottom);
     }
 
     private float[] CalcDecibelPerHz()
@@ -92,7 +95,7 @@ public class SpectrumAnalyzer : MonoBehaviour
             var pow = sample * sample;
             var rmsValue = Mathf.Sqrt(pow);
             dbValue[i] = 20.0f * Mathf.Log10(rmsValue);
-            dbValue[i] = Mathf.Clamp(dbValue[i], ClampBottom, float.MaxValue);
+            dbValue[i] = Mathf.Clamp(dbValue[i], ClampBottom, float.MaxValue) + Mathf.Abs(ClampBottom);
             i++;
         }
         return dbValue;
@@ -115,6 +118,7 @@ public class SpectrumAnalyzer : MonoBehaviour
     /// <returns></returns>
     private float CalcPitch(float[] spectrum)
     {
+        var size = 1000; //êîílÇ™ëÂÇ´Ç∑Ç¨ÇÈÇÃÇ≈íPà ïœä∑
         var maxValue = 0.0f;
         var maxIndex = 0;
 
@@ -134,7 +138,7 @@ public class SpectrumAnalyzer : MonoBehaviour
             var r = spectrum[maxIndex + 1] / spectrum[maxIndex];
             var f = maxIndex + 0.5f * (r * r - l * l);
 
-            return f * AudioSettings.outputSampleRate * 0.5f * maxIndex / SampleCount;
+            return (f * AudioSettings.outputSampleRate * 0.5f * maxIndex / SampleCount) / size;
         }
         else
         {
@@ -144,13 +148,46 @@ public class SpectrumAnalyzer : MonoBehaviour
 
     private float CalcPeakFallDownValue(float db)
     {
-        var delta = Time.deltaTime;
+        var currentPeak = Mathf.Max(db, Peak);
+        return Mathf.Lerp(currentPeak, 0.0f, FalldownPerTick * Time.deltaTime);
+    }
 
-        Peak = Mathf.Max(Peak - FalldownPerTick * delta, ClampBottom);
-        Peak = Mathf.Clamp(db, Peak, 0.0f);
-
-        var minValue = Peak - LevelRange;
-        return (Mathf.Clamp(db, minValue, Peak) - minValue) / LevelRange;
+    private void WaveVisualize()
+    {
+        for (int i = 1; i < spectrum.Length - 1; ++i)
+        {
+            Debug.DrawLine(
+                    new Vector3(i - 1, DbfsPerHz[i - 1], 0),
+                    new Vector3(i, DbfsPerHz[i], 0),
+                    Color.yellow);
+        }
+        for (int i = 1; i < spectrum.Length - 1; ++i)
+        {
+            if (prevDbfs.Count > i)
+            {
+                Debug.DrawLine(
+                    new Vector3(i - 1, prevDbfs[i - 1], 0),
+                    new Vector3(i, prevDbfs[i], 0),
+                    Color.red);
+            }
+            if (prevPich.Count > i)
+            {
+                Debug.DrawLine(
+                    new Vector3(i - 1, prevPich[i - 1], 0),
+                    new Vector3(i, prevPich[i], 0),
+                    Color.cyan);
+            }
+        }
+        prevDbfs.Add(Dbfs);
+        while (prevDbfs.Count > SampleCount)
+        {
+            prevDbfs.RemoveAt(0);
+        }
+        prevPich.Add(Pitch);
+        while (prevPich.Count > SampleCount)
+        {
+            prevPich.RemoveAt(0);
+        }
     }
 
     void OnGUI()
@@ -164,7 +201,6 @@ public class SpectrumAnalyzer : MonoBehaviour
                 GUILayout.Label($"Dbfs: {Dbfs}");
                 GUILayout.Label($"Pitch: {Pitch}");
                 GUILayout.Label($"Peak: {Peak}");
-                GUILayout.Label($"CurrentPeak: {CurrentPeak}");
                 GUILayout.Label($"spectrum: {spectrum[DebugView_Hz]}");
                 GUILayout.Label($"samples: {samples[DebugView_Hz]}");
             }

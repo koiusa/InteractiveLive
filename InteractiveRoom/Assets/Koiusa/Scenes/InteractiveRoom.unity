@@ -356,9 +356,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4790294164148337970, guid: fbb16d055cfa6b54b82ed6925a5dd1ff, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4790294164148337970, guid: fbb16d055cfa6b54b82ed6925a5dd1ff, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 2801dc944bf24bd4e98889f7296a6578, type: 2}
+    - target: {fileID: 4790294164148337970, guid: fbb16d055cfa6b54b82ed6925a5dd1ff, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7e808afb79af6754284ac8e371bf564f, type: 2}
     - target: {fileID: 4993592383450569229, guid: fbb16d055cfa6b54b82ed6925a5dd1ff, type: 3}
       propertyPath: m_Name
       value: Sphere
@@ -5928,9 +5936,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3730721070345576186, guid: 1e9b12dfdeae26c47a5060b453d5e25d, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3730721070345576186, guid: 1e9b12dfdeae26c47a5060b453d5e25d, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 2801dc944bf24bd4e98889f7296a6578, type: 2}
+    - target: {fileID: 3730721070345576186, guid: 1e9b12dfdeae26c47a5060b453d5e25d, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7e808afb79af6754284ac8e371bf564f, type: 2}
     - target: {fileID: 4881425386582012786, guid: 1e9b12dfdeae26c47a5060b453d5e25d, type: 3}
       propertyPath: m_Name
       value: Cube
@@ -6630,14 +6646,14 @@ MonoBehaviour:
   Sections:
   - Name: Section
     Clips:
-    - {fileID: 8300000, guid: e8126f948df5681439aa2a4466f17fa5, type: 3}
+    - {fileID: 8300000, guid: 0542aee39b08713418bc38636fb1ae7c, type: 3}
     Meters:
     - StartBar: 0
-      Tempo: 260
+      Tempo: 120
       UnitPerBeat: 4
       UnitPerBar: 16
-      Numerator: 16
-      Denominator: 16
+      Numerator: 4
+      Denominator: 4
     SyncType: 3
     SyncFactor: 1
     Markers: []
@@ -6646,7 +6662,7 @@ MonoBehaviour:
       Beat: 0
       Unit: 0
     ExitPointTiming:
-      Bar: 466
+      Bar: 30
       Beat: 0
       Unit: 0
     LoopStartTiming:
@@ -6654,7 +6670,7 @@ MonoBehaviour:
       Beat: 0
       Unit: 0
     LoopEndTiming:
-      Bar: 466
+      Bar: 30
       Beat: 0
       Unit: 0
     Transition:
