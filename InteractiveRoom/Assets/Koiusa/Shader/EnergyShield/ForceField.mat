@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: EnergyShield
+  m_Name: ForceField
   m_Shader: {fileID: -6465566751694194690, guid: fb4f6d9bfe4a23140b095476ba6b0826, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -91,7 +91,8 @@ Material:
     m_Ints: []
     m_Floats:
     - EdgeOffset: 0.5
-    - FresnelPower: 3
+    - Fill: 0
+    - FresnelPower: 2
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
