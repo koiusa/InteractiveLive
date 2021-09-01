@@ -7176,6 +7176,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 639156659}
     m_Modifications:
+    - target: {fileID: 3730721070345576186, guid: 1e9b12dfdeae26c47a5060b453d5e25d, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3730721070345576186, guid: 1e9b12dfdeae26c47a5060b453d5e25d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 447c6384e8869e640878beffbe7c5b70, type: 2}
     - target: {fileID: 4881425386582012786, guid: 1e9b12dfdeae26c47a5060b453d5e25d, type: 3}
       propertyPath: m_Name
       value: Cube
@@ -7186,7 +7194,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6328204801719935877, guid: 1e9b12dfdeae26c47a5060b453d5e25d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.51
+      value: -1.692
       objectReference: {fileID: 0}
     - target: {fileID: 6328204801719935877, guid: 1e9b12dfdeae26c47a5060b453d5e25d, type: 3}
       propertyPath: m_LocalPosition.y
