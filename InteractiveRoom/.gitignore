@@ -61,13 +61,11 @@ crashlytics-build.properties
 # Unity3D Build file
 UnityBuild/
 
-# External Resource
-[Aa]ssets/Sound
-
 # External Assets
 ## Get latest from https://github.com/geekdrums/MusicEngine
-[Aa]ssets/MusicEngine
+[Aa]ssets/ExternalAssets/MusicEngine
 ## Get latest from https://assetstore.unity.com/packages/tools/animation/dotween-hotween-v2-27676
-[Aa]ssets/Plugins/Demigiant
-[Aa]ssets/Plugins/Demigiant.*
-[Aa]ssets/Resources/DOTweenSettings.*
+[Aa]ssets/ExternalAssets/Plugins/Demigiant
+
+# External Resource
+[Aa]ssets/ExternalAssets/Resource/Sound
