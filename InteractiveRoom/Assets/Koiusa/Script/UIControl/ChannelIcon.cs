@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
-using UnityEngine.Windows;
+using System.IO;
+
 namespace Koiusa.InteractiveRoom
 {
     public class ChannelIcon : MonoBehaviour
