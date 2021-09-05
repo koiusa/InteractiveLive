@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Hologram
-  m_Shader: {fileID: -6465566751694194690, guid: f45646395a0904948877e67ef7fa58c2, type: 3}
+  m_Name: OuterSphere
+  m_Shader: {fileID: -6465566751694194690, guid: 95085401ab8ae514d8a603ca35346ad3, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -19,8 +19,8 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - Texture2D_48882336:
-        m_Texture: {fileID: 2800000, guid: 7edaa4569e98b4149bb3964a0be8b8be, type: 3}
+    - ScrollingElectricWaveTexture:
+        m_Texture: {fileID: 2800000, guid: b76aaf6c44f8a3243bf810450fae7da4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -37,9 +37,13 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - Vector1_6DC2C68C: 0.1
+    - BorderPower: 2
+    - BorderSize: 1
+    - DistortionSpeed: 0.1
+    - NoiseScale: 0.1
+    - ScrollingSpeed: 0.1
+    - SurfaceMovementSpeed: 0.01
     m_Colors:
-    - BaseColor: {r: 0.44388568, g: 0.7075471, b: 0.4713053, a: 0}
-    - Fresnel_Color: {r: 1.498039, g: 0.5411765, b: 0, a: 0}
-    - Vector2_6925FF1E: {r: 1, g: 3, b: 0, a: 0}
+    - BorderColor: {r: 0.7247444, g: 0.03301889, b: 1, a: 0.9843137}
+    - TextureColor: {r: 0, g: 4, b: 1.3647059, a: 0}
   m_BuildTextureStacks: []
