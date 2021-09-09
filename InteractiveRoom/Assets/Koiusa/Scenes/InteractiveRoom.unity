@@ -7217,6 +7217,11 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &1357701819 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8585387905218658219, guid: 79e624e6a8770a946afb866fd94b394b, type: 3}
+  m_PrefabInstance: {fileID: 1960674733}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1392138867
 GameObject:
   m_ObjectHideFlags: 0
@@ -7804,6 +7809,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meshParticlePrefab: {fileID: 4278359430921927977, guid: 9387226269ed9434d983e34ce9d0500d, type: 3}
   interval: 1
+  model: {fileID: 1357701819}
 --- !u!4 &1694445304
 Transform:
   m_ObjectHideFlags: 0

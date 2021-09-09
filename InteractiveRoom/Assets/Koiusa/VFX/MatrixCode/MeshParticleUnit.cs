@@ -10,6 +10,7 @@ public class MeshParticleUnit : MonoBehaviour
         //public const string UVMap = "UVMap";
         //public const string ModelMainTex = "ModelMainTex";
         public const string VtxCount = "VtxCount";
+        public const string Mesh = "Mesh";
     }
 
     public VisualEffect effect;
@@ -19,9 +20,10 @@ public class MeshParticleUnit : MonoBehaviour
 
     void Update()
     {
-        effect.SetTexture(PropName.PositionMap, mapSet.position);
+        //effect.SetTexture(PropName.PositionMap, mapSet.position);
         //effect.SetTexture(PropName.UVMap, mapSet.uv);
         //effect.SetTexture(PropName.ModelMainTex, modelMainTex);
         effect.SetInt(PropName.VtxCount, mapSet.vtxCount);
+        effect.SetMesh(PropName.Mesh, mapSet.mesh);
     }
 }

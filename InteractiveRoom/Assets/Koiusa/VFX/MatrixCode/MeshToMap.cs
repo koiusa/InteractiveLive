@@ -8,6 +8,7 @@ public class MapSet
     public Texture2D position;
     public Texture2D uv;
     public Texture2D normal;
+    public Mesh mesh;
 }
 
 
@@ -19,25 +20,26 @@ public class MeshToMap
         IEnumerable<Vector2> uvList = mesh.uv;
         IEnumerable<Vector3> normals = mesh.normals;
 
-        if (pointCountPerArea > 0f)
-        {
-            (vertices, uvList, normals) = DividePolygon(mesh, pointCountPerArea);
-        }
+        //if (pointCountPerArea > 0f)
+        //{
+        //    (vertices, uvList, normals) = DividePolygon(mesh, pointCountPerArea);
+        //}
 
         var count = vertices.Count();
-        var (width, height) = CalcTexSize(count);
+        //var (width, height) = CalcTexSize(count);
 
-        var positions = vertices.Select(vtx => new Color(vtx.x, vtx.y, vtx.z));
-        var uvs = uvList.Select(uv => new Color(uv.x, uv.y, 0f));
-        var nrms = normals.Select(nrm => new Color(nrm.x, nrm.y, nrm.z));
+        //var positions = vertices.Select(vtx => new Color(vtx.x, vtx.y, vtx.z));
+        //var uvs = uvList.Select(uv => new Color(uv.x, uv.y, 0f));
+        //var nrms = normals.Select(nrm => new Color(nrm.x, nrm.y, nrm.z));
 
 
         var mapSet = new MapSet()
         {
             vtxCount = count,
-            position = CreateMap(positions, width, height),
-            uv = CreateMap(uvs, width, height),
-            normal = CreateMap(nrms, width, height)
+            //position = CreateMap(positions, width, height),
+            //uv = CreateMap(uvs, width, height),
+            //normal = CreateMap(nrms, width, height),
+            mesh = mesh
 
         };
 
