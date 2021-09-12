@@ -955,7 +955,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 8
+      m_SerializableObject: 24
     min: -Infinity
     max: Infinity
     enumValues: []
@@ -1103,7 +1103,7 @@ MonoBehaviour:
   m_ImportDependencies: []
   m_GraphVersion: 6
   m_ResourceVersion: 1
-  m_saved: 1
+  m_saved: 0
   m_SubgraphDependencies:
   - {fileID: 5371698745253816930, guid: cdc1970630fa05a468651a59dc136b8d, type: 3}
   - {fileID: 5371698745253816930, guid: c2b9cd22191960246939f1ed7f5ee5fa, type: 3}
@@ -29006,7 +29006,7 @@ MonoBehaviour:
       inputSlot: {fileID: 8926484042661615537}
     position: {x: 4818, y: 3245}
     expandedSlots: []
-    expanded: 0
+    expanded: 1
 --- !u!114 &8926484042661615540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29032,7 +29032,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 8
+      m_SerializableObject: 24
     m_Space: 2147483647
   m_Property:
     name: o
@@ -37058,7 +37058,7 @@ MonoBehaviour:
   m_InputSlots:
   - {fileID: 8926484042661616025}
   m_OutputSlots: []
-  m_Disabled: 1
+  m_Disabled: 0
   compositionPosition: 0
   compositionDirection: 0
   positionMode: 0
@@ -37090,7 +37090,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEditor.VFX.ArcSphere, Unity.VisualEffectGraph.Editor,
           Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"sphere":{"center":{"x":0.0,"y":0.0,"z":0.0},"radius":0.0},"arc":6.2831854820251469}'
+      m_SerializableObject: '{"sphere":{"center":{"x":0.0,"y":0.0,"z":0.0},"radius":0.10000000149011612},"arc":6.2831854820251469}'
     m_Space: 0
   m_Property:
     name: ArcSphere
