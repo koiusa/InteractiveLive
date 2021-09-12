@@ -26,11 +26,11 @@ public class MeshToMap
         //}
 
         var count = vertices.Count();
-        //var (width, height) = CalcTexSize(count);
+        var (width, height) = CalcTexSize(count);
 
         //var positions = vertices.Select(vtx => new Color(vtx.x, vtx.y, vtx.z));
         //var uvs = uvList.Select(uv => new Color(uv.x, uv.y, 0f));
-        //var nrms = normals.Select(nrm => new Color(nrm.x, nrm.y, nrm.z));
+        var nrms = normals.Select(nrm => new Color(nrm.x, nrm.y, nrm.z));
 
 
         var mapSet = new MapSet()
@@ -38,7 +38,7 @@ public class MeshToMap
             vtxCount = count,
             //position = CreateMap(positions, width, height),
             //uv = CreateMap(uvs, width, height),
-            //normal = CreateMap(nrms, width, height),
+            normal = CreateMap(nrms, width, height),
             mesh = mesh
 
         };

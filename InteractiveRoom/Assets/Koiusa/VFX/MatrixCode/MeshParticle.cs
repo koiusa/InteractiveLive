@@ -33,9 +33,9 @@ public class MeshParticle : MonoBehaviour
         {
             InitEffect();
 
-            StartCoroutine(StartEffectAtiveSequence());
-            StartCoroutine(StartTargetActiveSequence());
-            Destroy(gameObject, autoDestroyDelay);
+            //StartCoroutine(StartEffectAtiveSequence());
+            //StartCoroutine(StartTargetActiveSequence());
+            //Destroy(gameObject, autoDestroyDelay);
         }
     }
 

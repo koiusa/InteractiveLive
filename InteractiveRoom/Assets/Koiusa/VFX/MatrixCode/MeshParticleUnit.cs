@@ -9,6 +9,7 @@ public class MeshParticleUnit : MonoBehaviour
         public const string PositionMap = "PositionMap";
         //public const string UVMap = "UVMap";
         //public const string ModelMainTex = "ModelMainTex";
+        public const string NormalMap = "NormalMap";
         public const string VtxCount = "VtxCount";
         public const string Mesh = "Mesh";
     }
@@ -23,6 +24,7 @@ public class MeshParticleUnit : MonoBehaviour
         //effect.SetTexture(PropName.PositionMap, mapSet.position);
         //effect.SetTexture(PropName.UVMap, mapSet.uv);
         //effect.SetTexture(PropName.ModelMainTex, modelMainTex);
+        effect.SetTexture(PropName.NormalMap, mapSet.normal);
         effect.SetInt(PropName.VtxCount, mapSet.vtxCount);
         effect.SetMesh(PropName.Mesh, mapSet.mesh);
     }
