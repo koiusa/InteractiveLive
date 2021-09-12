@@ -6672,7 +6672,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1109828543}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.87, y: 0, z: -1.31}
+  m_LocalPosition: {x: 0.87, y: 0.481, z: -1.31}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 1539969863}
@@ -7703,8 +7703,23 @@ VisualEffect:
       - m_Value: 4
         m_Name: FlareSize
         m_Overridden: 0
+      - m_Value: 1
+        m_Name: SparkAlongVelocity
+        m_Overridden: 0
+      - m_Value: 0.1
+        m_Name: SparkScaleSideVelocity
+        m_Overridden: 1
+      - m_Value: 0.1
+        m_Name: SparkSize
+        m_Overridden: 1
     m_Vector2f:
-      m_Array: []
+      m_Array:
+      - m_Value: {x: 0.1, y: 0.2}
+        m_Name: RefrectionSpeed
+        m_Overridden: 1
+      - m_Value: {x: 0.5, y: 2}
+        m_Name: SparkLifetime
+        m_Overridden: 1
     m_Vector3f:
       m_Array:
       - m_Value: {x: 0, y: 2, z: 2}
