@@ -6672,7 +6672,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1109828543}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.5, y: 0, z: -1.31}
+  m_LocalPosition: {x: 0.87, y: 0, z: -1.31}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 1539969863}
@@ -7650,6 +7650,7 @@ VFXRenderer:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7706,9 +7707,9 @@ VisualEffect:
       m_Array: []
     m_Vector3f:
       m_Array:
-      - m_Value: {x: 0, y: 0, z: 0}
+      - m_Value: {x: 0, y: 2, z: 2}
         m_Name: LaserSrcPosition
-        m_Overridden: 0
+        m_Overridden: 1
       - m_Value: {x: 0, y: 0, z: 0.1}
         m_Name: LaserDstPosition
         m_Overridden: 0
