@@ -35,7 +35,7 @@ public class VFXLaserPlayer : MonoBehaviour
             _visualEffect.SetVector3("LaserDstPosition", hit.point);
 
             // –@üî•ñ‚Ìİ’è
-          //  _visualEffect.SetVector3("Collision Normal", hit.normal);
+            _visualEffect.SetVector3("CollisionNormal", hit.normal);
         }
         else
         {
@@ -43,7 +43,7 @@ public class VFXLaserPlayer : MonoBehaviour
             _visualEffect.SetVector3("LaserDstPosition", laserTarget.position);
 
             // –@üî•ñ‚Ìİ’è
-           // _visualEffect.SetVector3("Collision Normal", new Vector3(0f, 1f, 0f));
+            _visualEffect.SetVector3("CollisionNormal", new Vector3(0f, 1f, 0f));
         }
     }
 }
