@@ -10,6 +10,9 @@
             "m_Id": "c0b4fe3b9e21434aac1b55b86b0f2ff2"
         },
         {
+            "m_Id": "38bb5a6f6bf24b53a09049099d54b2b4"
+        },
+        {
             "m_Id": "0492cf64517d4a038858979635ff9724"
         }
     ],
@@ -92,6 +95,9 @@
         },
         {
             "m_Id": "fa9810ab2e8147dca1ee7d91a7ffeb73"
+        },
+        {
+            "m_Id": "e48d7a22fb614df58a498d899768e9f4"
         }
     ],
     "m_GroupDatas": [
@@ -382,20 +388,6 @@
         {
             "m_OutputSlot": {
                 "m_Node": {
-                    "m_Id": "bba05656e11f4ab6978aaebda8b7f78a"
-                },
-                "m_SlotId": 0
-            },
-            "m_InputSlot": {
-                "m_Node": {
-                    "m_Id": "b765de85d15f4f2e9aab327db2f318a5"
-                },
-                "m_SlotId": 0
-            }
-        },
-        {
-            "m_OutputSlot": {
-                "m_Node": {
                     "m_Id": "c6078e05e2c14a0d8337f118e8b5c07b"
                 },
                 "m_SlotId": 2
@@ -438,6 +430,20 @@
         {
             "m_OutputSlot": {
                 "m_Node": {
+                    "m_Id": "e48d7a22fb614df58a498d899768e9f4"
+                },
+                "m_SlotId": 0
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "37cf9032bf024376a260d37287dc47e2"
+                },
+                "m_SlotId": 1
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
                     "m_Id": "e4b069d3b1bd40f7a88186baaf575aa6"
                 },
                 "m_SlotId": 2
@@ -459,6 +465,20 @@
             "m_InputSlot": {
                 "m_Node": {
                     "m_Id": "e4b069d3b1bd40f7a88186baaf575aa6"
+                },
+                "m_SlotId": 0
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "fa9810ab2e8147dca1ee7d91a7ffeb73"
+                },
+                "m_SlotId": 2
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "b765de85d15f4f2e9aab327db2f318a5"
                 },
                 "m_SlotId": 0
             }
@@ -1242,6 +1262,31 @@
 }
 
 {
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty",
+    "m_ObjectId": "38bb5a6f6bf24b53a09049099d54b2b4",
+    "m_Guid": {
+        "m_GuidSerialized": "eeff79c7-acb3-4e48-b879-be6194491ce8"
+    },
+    "m_Name": "GlitchThick",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "GlitchThick",
+    "m_DefaultReferenceName": "GlitchThick",
+    "m_OverrideReferenceName": "",
+    "m_GeneratePropertyBlock": true,
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_Value": 0.23999999463558198,
+    "m_FloatType": 1,
+    "m_RangeValues": {
+        "x": 0.0,
+        "y": 1.0
+    }
+}
+
+{
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "3b1d045ac4274da2aa7a83c2c57b95d7",
@@ -1822,10 +1867,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 1823.9998779296875,
-            "y": -357.00006103515627,
-            "width": 117.99999237060547,
-            "height": 77.0
+            "x": 1969.0,
+            "y": -353.99993896484377,
+            "width": 113.0,
+            "height": 101.0
         }
     },
     "m_Slots": [
@@ -2306,7 +2351,7 @@
     "m_ObjectId": "b34bdb890c7849179f22426b194d7565",
     "m_Title": "SideLine",
     "m_Position": {
-        "x": -481.0,
+        "x": -402.0,
         "y": -679.0
     }
 }
@@ -3011,6 +3056,41 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.PropertyNode",
+    "m_ObjectId": "e48d7a22fb614df58a498d899768e9f4",
+    "m_Group": {
+        "m_Id": "b34bdb890c7849179f22426b194d7565"
+    },
+    "m_Name": "Property",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": -367.0,
+            "y": -232.99996948242188,
+            "width": 102.0,
+            "height": 34.0
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "e545261297884f4b85e2cc0894c60e7b"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_Property": {
+        "m_Id": "38bb5a6f6bf24b53a09049099d54b2b4"
+    }
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.NoiseNode",
     "m_ObjectId": "e4b069d3b1bd40f7a88186baaf575aa6",
     "m_Group": {
@@ -3045,6 +3125,21 @@
     "m_CustomColors": {
         "m_SerializableColors": []
     }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "e545261297884f4b85e2cc0894c60e7b",
+    "m_Id": 0,
+    "m_DisplayName": "GlitchThick",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Out",
+    "m_StageCapability": 3,
+    "m_Value": 0.0,
+    "m_DefaultValue": 0.0,
+    "m_Labels": []
 }
 
 {
