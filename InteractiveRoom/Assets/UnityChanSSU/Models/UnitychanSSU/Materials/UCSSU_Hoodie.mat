@@ -168,10 +168,12 @@ Material:
     m_Ints: []
     m_Floats:
     - Distance: 0.1
-    - Distortion: 0.01
+    - Distortion: 0.2
+    - Fader: 0.46
     - FlameRate: 6
     - Frequency: 0.6
     - GlitchScale: 0.15
+    - Hight: 1
     - NoiseSpeed: 0.5
     - _1st2nd_Shades_Feather: 0.0001
     - _1st_ShadeColor_Feather: 0.0001
