@@ -10,8 +10,8 @@ public class BubbleShield : MonoBehaviour
     [SerializeField] float _DisplacementMagnitude;
     [SerializeField] float _LerpSpeed;
     [SerializeField] float _DisolveSpeed;
-    bool _ShieldOn;
-    Coroutine _DisolveCoroutine;
+    bool _shieldOn;
+    Coroutine _disolveCoroutine;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +25,7 @@ public class BubbleShield : MonoBehaviour
         {
             Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
             RaycastHit hit;
-            if(Physics.Raycast(ray,out hit))
+            if (Physics.Raycast(ray, out hit))
             {
                 HitShield(hit.point);
             }
@@ -36,9 +36,9 @@ public class BubbleShield : MonoBehaviour
         }
     }
 
-    public void HitShield(Vector3 hitpos)
+    public void HitShield(Vector3 hitPos)
     {
-        _renderer.material.SetVector("HitPosition", hitpos);
+        _renderer.material.SetVector("HitPosition", hitPos);
         StopAllCoroutines();
         StartCoroutine(Coroutine_HitDisplacement());
     }
@@ -46,25 +46,25 @@ public class BubbleShield : MonoBehaviour
     public void OpenCloseShield()
     {
         float target = 1;
-        if (_ShieldOn)
+        if (_shieldOn)
         {
             target = 0;
         }
-        _ShieldOn = !_ShieldOn;
-        if(_DisolveCoroutine != null)
+        _shieldOn = !_shieldOn;
+        if (_disolveCoroutine != null)
         {
-            StopCoroutine(_DisolveCoroutine);
+            StopCoroutine(_disolveCoroutine);
         }
-        _DisolveCoroutine = StartCoroutine(Coroutine_DisolveShield(target));
+        _disolveCoroutine = StartCoroutine(Coroutine_DisolveShield(target));
     }
 
     IEnumerator Coroutine_HitDisplacement()
     {
         float lerp = 0;
-        while(lerp < 1)
+        while (lerp < 1)
         {
             _renderer.material.SetFloat("DisplacementStrength", _DisplacementCurve.Evaluate(lerp) * _DisplacementMagnitude);
-            lerp += Time.deltaTime * _LerpSpeed;
+            lerp += Time.deltaTime*_LerpSpeed;
             yield return null;
         }
     }

@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BubbleShieldScreenPosition : MonoBehaviour
+public class BubbleShieldMagnifyingObject : MonoBehaviour
 {
     Renderer _renderer;
     Camera _cam;
-    // Start is called before the first frame update
     void Start()
     {
         _renderer = GetComponent<Renderer>();
