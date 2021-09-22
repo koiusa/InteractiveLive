@@ -136,7 +136,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8220462702727650722, guid: 2ab59323acf1fbc48bca18b62bb15319, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: -3.015
       objectReference: {fileID: 0}
     - target: {fileID: 8220462702727650722, guid: 2ab59323acf1fbc48bca18b62bb15319, type: 3}
       propertyPath: m_LocalPosition.y
@@ -8753,7 +8753,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1792317208}
-  m_LocalRotation: {x: 0.07924445, y: -0.000000017152274, z: 0.0000000013635105, w: 0.9968552}
+  m_LocalRotation: {x: 0.07924447, y: 0.000000017152265, z: -0.0000000013635101, w: 0.9968552}
   m_LocalPosition: {x: 0, y: 1.6, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -8858,6 +8858,24 @@ MonoBehaviour:
   m_Damping: 0
   m_DampingWhenOccluded: 0
   m_OptimalTargetDistance: 0
+--- !u!1 &1794912022 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8745748492256642840, guid: 2ab59323acf1fbc48bca18b62bb15319, type: 3}
+  m_PrefabInstance: {fileID: 11467650}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &1794912029
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1794912022}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1857523877
 GameObject:
   m_ObjectHideFlags: 0
