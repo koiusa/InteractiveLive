@@ -4,7 +4,8 @@
 	Properties
 	{
 		_Color("Color", color) = (1, 1, 1, 0)
-		_DispTex("Disp Texture", 2D) = "gray" {}
+		_DispTex("Disp Texture", 2D) = "black" {}
+		_MainTex("Main Texture", 2D) = "gray" {}
 		_Glossiness("Smoothness", Range(0,1)) = 0.5
 		_Metallic("Metallic", Range(0,1)) = 0.0
 		_MinDist("Min Distance", Range(0.1, 50)) = 10
@@ -32,6 +33,8 @@
 			float _MaxDist;
 			sampler2D _DispTex;
 			float4 _DispTex_TexelSize;
+			sampler2D _MainTex;
+			half4 _MainTex_ST;
 			half4 _Color;
 			half _Glossiness;
 			half _Metallic;
@@ -42,19 +45,17 @@
 				v.vertex.xyz += v.normal * d;
 
 				Varyings output;
-				v.vertex.xyz += (v.normal) * _Displacement;
+				output.vertex.xyz += (v.normal) * _Displacement;
 				output.vertex = TransformObjectToHClip(v.vertex.xyz);
 				output.color = v.color;
 				output.normal = v.normal;
 				output.uv = v.uv;
-
-				output.color.rgb = _Color.rgb;
-				//output.Metallic = _Metallic;
-				//output.Smoothness = _Glossiness;
-				output.color.a = _Color.a * (0.5 + 0.5 * clamp(tex2Dlod(_DispTex, float4(v.uv,0,0)).r, 0, 1));
+				//v.Metallic = _Metallic;
+				//v.Smoothness = _Glossiness;
+				output.color.a = _Color.a * (0.5 + 0.5 * clamp(tex2Dlod(_DispTex, float4(v.uv, 0, 0)).r, 0, 1));
 
 				float3 duv = float3(_DispTex_TexelSize.xy, 0);
-				half v1 = tex2Dlod(_DispTex, float4(v.uv - duv.xz,0,0)).y;
+				half v1 = tex2Dlod(_DispTex, float4(v.uv - duv.xz, 0, 0)).y;
 				half v2 = tex2Dlod(_DispTex, float4(v.uv + duv.xz, 0, 0)).y;
 				half v3 = tex2Dlod(_DispTex, float4(v.uv - duv.zy, 0, 0)).y;
 				half v4 = tex2Dlod(_DispTex, float4(v.uv + duv.zy, 0, 0)).y;
@@ -84,8 +85,8 @@
 
 			half4 frag(Varyings IN) : SV_Target
 			{
-				half4 tex = tex2D(_DispTex, IN.uv);
-				tex.a = _Color.a * (0.5 + 0.5 * clamp(tex2Dlod(_DispTex, float4(IN.uv, 0, 0)).r, 0, 1));
+				float2 texuv = float2(IN.uv.x * _MainTex_ST.x ,IN.uv.y * _MainTex_ST.y);
+				half4 tex = tex2D(_MainTex, texuv);
 				return tex;
 			}
 
