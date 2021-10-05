@@ -45,7 +45,6 @@
 				v.vertex.xyz += v.normal * d;
 
 				Varyings output;
-				output.vertex.xyz += (v.normal) * _Displacement;
 				output.vertex = TransformObjectToHClip(v.vertex.xyz);
 				output.color = v.color;
 				output.normal = v.normal;
@@ -53,13 +52,6 @@
 				//v.Metallic = _Metallic;
 				//v.Smoothness = _Glossiness;
 				output.color.a = _Color.a * (0.5 + 0.5 * clamp(tex2Dlod(_DispTex, float4(v.uv, 0, 0)).r, 0, 1));
-
-				float3 duv = float3(_DispTex_TexelSize.xy, 0);
-				half v1 = tex2Dlod(_DispTex, float4(v.uv - duv.xz, 0, 0)).y;
-				half v2 = tex2Dlod(_DispTex, float4(v.uv + duv.xz, 0, 0)).y;
-				half v3 = tex2Dlod(_DispTex, float4(v.uv - duv.zy, 0, 0)).y;
-				half v4 = tex2Dlod(_DispTex, float4(v.uv + duv.zy, 0, 0)).y;
-				output.normal = normalize(float3(v1 - v2, v3 - v4, 0.3));
 
 				return output;
 			}
@@ -86,7 +78,15 @@
 			half4 frag(Varyings IN) : SV_Target
 			{
 				float2 texuv = float2(IN.uv.x * _MainTex_ST.x ,IN.uv.y * _MainTex_ST.y);
-				half4 tex = tex2D(_MainTex, texuv);
+				
+				float3 duv = float3(_DispTex_TexelSize.xy, 0);
+				half v1 = tex2Dlod(_DispTex, float4(IN.uv - duv.xz, 0, 0)).y;
+				half v2 = tex2Dlod(_DispTex, float4(IN.uv + duv.xz, 0, 0)).y;
+				half v3 = tex2Dlod(_DispTex, float4(IN.uv - duv.zy, 0, 0)).y;
+				half v4 = tex2Dlod(_DispTex, float4(IN.uv + duv.zy, 0, 0)).y;
+				float3 Normal = normalize(float3(v1 - v2, v3 - v4, 0.3));
+
+				half4 tex = tex2Dlod(_MainTex, float4(float3(texuv,0) * Normal,0));
 				return tex;
 			}
 
