@@ -12,6 +12,7 @@
 		_MaxDist("Max Distance", Range(0.1, 50)) = 25
 		_TessFactor("Tessellation", Range(1, 50)) = 10
 		_Displacement("Displacement", Range(0, 1.0)) = 0.3
+		_eta("eta", Float) = 1
 	}
 
 	SubShader
@@ -38,6 +39,7 @@
 			half4 _Color;
 			half _Glossiness;
 			half _Metallic;
+			float _Eta;
 
 			Varyings vert(Attributes v)
 			{
@@ -84,7 +86,11 @@
 			half4 frag(Varyings IN) : SV_Target
 			{
 				float2 texuv = float2(IN.uv.x * _MainTex_ST.x ,IN.uv.y * _MainTex_ST.y);
-				half4 tex = tex2Dlod(_MainTex, float4(float3(texuv,0) + IN.normal,0));
+				half4 p = half4(TransformWorldToView(IN.vertex),1);
+				half3 v = normalize(p.xyz / p.w);
+				half3 n = IN.normal;
+				half3 r = refract(v, n, _Eta);
+				half4 tex = tex2Dlod(_MainTex, float4(float3(texuv,0) - r, 0));
 				return tex;
 			}
 
