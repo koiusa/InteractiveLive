@@ -18,11 +18,14 @@ namespace Koiusa.InteractiveRoom
 
         private ThirdPersonController thirdPersonController;
         private StarterAssetsInputs starterAssetsInputs;
+        private Animator animator;
 
         private void Awake()
         {
             thirdPersonController = GetComponent<ThirdPersonController>();
             starterAssetsInputs = GetComponent<StarterAssetsInputs>();
+            animator = GetComponent<Animator>();
+
         }
 
         private void Update()
@@ -41,6 +44,7 @@ namespace Koiusa.InteractiveRoom
                 aimVirualCamera.gameObject.SetActive(true);
                 thirdPersonController.SetSensitivity(aimSensitivity);
                 thirdPersonController.SetRotateMove(false);
+                animator.SetLayerWeight(1, Mathf.Lerp(animator.GetLayerWeight(1),1f,Time.deltaTime * 10f));
 
                 MousePointerDelayMove(mouseWorldPosition);
             }
@@ -49,6 +53,7 @@ namespace Koiusa.InteractiveRoom
                 aimVirualCamera.gameObject.SetActive(false);
                 thirdPersonController.SetSensitivity(normalSensitivity);
                 thirdPersonController.SetRotateMove(true);
+                animator.SetLayerWeight(1, Mathf.Lerp(animator.GetLayerWeight(1), 0f, Time.deltaTime * 10f));
             }
 
             if (starterAssetsInputs.shoot)
